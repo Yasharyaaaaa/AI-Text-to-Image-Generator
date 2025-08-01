@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Text To Image Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Text To Image Generator</h1>
+  </header>
+
+  <main>
+    <section class="prompt-card">
+      <form id="prompt-form" method="POST">
+        <label for="prompt">Describe your vision:</label>
+        <textarea name="prompt" id="prompt" placeholder="e.g. futuristic city under neon skies"></textarea>
+        <button id="submit-button" type="submit">Generate</button>
+        <p id="status"></p>
+      </form>
+    </section>
+
+    {% if new_image %}
+    <section class="result-card">
+      <h2>Latest Creation</h2>
+      <img src="{{ new_image }}" alt="Generated image">
+    </section>
+    {% endif %}
+
+    <section class="gallery-section">
+      <h2>Gallery</h2>
+      {% if gallery %}
+      <div class="gallery">
+        {% for img in gallery %}
+        <div class="card">
+          <img src="{{ img }}" alt="Generated image">
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p class="empty">No images yet. Try generating one above!</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by Flux Schnell • Built with Flask</p>
+  </footer>
+</body>
+</html>
